@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const serverless = require('serverless-http');
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
@@ -8,6 +8,5 @@ app.get('/', (req, res) => {
 
 app.use('/.netlify/functions/server', router);  // path must route to lambda
 
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
-})
+module.exports = app;
+module.exports.handler = serverless(app);
